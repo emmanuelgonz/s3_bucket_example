@@ -1,4 +1,4 @@
-# Accessing AWS S3 Buckets with Multi-Factor Authentication (MFA)
+# Accessing AWS S3 Buckets
 
 This repository includes two files: a Jupyter notebook (s3_example.ipynb) and a Python script (s3_example.py). Both files contain identical code, providing users with the flexibility to choose their preferred execution method.
 
