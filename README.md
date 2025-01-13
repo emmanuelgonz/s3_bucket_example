@@ -41,6 +41,7 @@ The [mfa_nonmfa](./mfa_nonmfa/) directory contains two Jupyer notebook examples,
 The NOS-T framework employs the Advanced Message Queuing Protocol (AMQP) through RabbitMQ. However, in some scenarios, different messaging protocols are necessary. For instance, when model output data needs to be ingested by SOS applications via resources other than RabbitMQ, changes in data availability within a Simple Storage Service (S3) bucket are detected by an AWS Lambda function. This Lambda function sends a Simple Notification Service (SNS) message to a Simple Queue Service (SQS) queue. SOS applications receive data availability messages by subscribing to the SQS queue (Figure 1).
 
 <img src="https://docs.google.com/drawings/d/e/2PACX-1vTmZIFYDTr8kw22hmZzo7mpdfYMv_oKMk9DdagOu0ESL11nvcv374iLfNZTaMVI7LT1iGR6EyGKiY7A/pub?w=1318&amp;h=764" alt="Publish/Subscribe Workflow Diagram involving AWS resources including S3, Lambda, SNS, and SQS.">
+
 <figcaption>Figure 1: Publish/Subscribe Workflow Diagram</figcaption>
 
 The [send_receive](./send_receive/) directory contains two Python scripts, [uploader.py](./send_receive/uploader.py) and [subscriber.py](./send_receive/subscriber.py). The `uploader.py` script uploads a file to an S3 bucket. This action triggers the Lambda function that watches for changes in data availability. The `subscriber.py` script polls the queue for any new messages. Upon receiving a data availability message, the data referenced in the message is downloaded.
