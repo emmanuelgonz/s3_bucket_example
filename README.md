@@ -1,6 +1,16 @@
 # Accessing AWS S3 Buckets
 
-This repository includes two files: a Jupyter notebook (s3_example.ipynb) and a Python script (s3_example.py). Both files contain identical code, providing users with the flexibility to choose their preferred execution method.
+This repository contains three examples: 
+
+* [Basic](#basic): Basic access of AWS resources using the boto3 Python library.
+
+* [MFA vs non-MFA](#mfa-vs-non-mfa): Access of AWS resources using multi-factor authentication (MFA) and non-MFA
+
+* [Publish/Subscribe](#publishsubscribe): Application performs an action that triggers AWS resources to send a notification message. This notification message triggers another application subscribing to that queue.
+
+## Basic
+
+The repository includes two files: a Jupyter notebook (`s3_example.ipynb`) and a Python script (`s3_example.py`). Both files contain identical code, providing users with the flexibility to choose their preferred execution method.
 
 Below are the sections covered in the example:
 
@@ -17,4 +27,19 @@ Below are the sections covered in the example:
 1. Upload a file
     * Upload a file from your local machine to an S3 bucket, enabling you to store and share data securely in the cloud
 
-> NOTE: This example includes the functions `get_mfa_serial()`, `get_mfa_token()`, `get_session_token()`, and `decompose_mfa_validated_token()` to facilitate MFA access. If MFA is not required, these functions can be omitted.
+> NOTE: This example includes the functions `get_mfa_serial()`, `get_mfa_token()`, `get_session_token()`, and `decompose_mfa_validated_token()` to facilitate multi-factor authentication (MFA) access. If MFA is not required, these functions can be omitted.
+
+## MFA vs non-MFA
+
+The NASA Science Managed Cloud Environment (SMCE) requires MFA. However, many applications integrated within [NOS-T](https://github.com/code-lab-org/nost-tools), including the the Snow Observing Systems (SOS) applications, require continuously running applications that need not re-authenticate.
+
+The `mfa_nonmfa` directory contains two Jupyer notebook examples, `s3_example_mfa.ipynb` and `s3_example_nomfa.ipynb`. These two notebooks outline the difference between MFA and non-MFA authentication within the boto3 library.
+
+## Publish/Subscribe
+
+The NOS-T framework employs the Advanced Message Queuing Protocol (AMQP) through RabbitMQ. However, in some scenarios, different messaging protocols are necessary. For instance, when model output data needs to be ingested by SOS applications via resources other than RabbitMQ, changes in data availability within a Simple Storage Service (S3) bucket are detected by an AWS Lambda function. This Lambda function sends a Simple Notification Service (SNS) message to a Simple Queue Service (SQS) queue. SOS applications receive data availability messages by subscribing to the SQS queue (Figure 1).
+
+<img src="https://docs.google.com/drawings/d/e/2PACX-1vTmZIFYDTr8kw22hmZzo7mpdfYMv_oKMk9DdagOu0ESL11nvcv374iLfNZTaMVI7LT1iGR6EyGKiY7A/pub?w=1318&amp;h=764" alt="Publish/Subscribe Workflow Diagram involving AWS resources including S3, Lambda, SNS, and SQS.">
+<figcaption>Figure 1: Publish/Subscribe Workflow Diagram</figcaption>
+
+The `send_receive` directory contains two Python scripts, `uploader.py` and `subscriber.py`. The `uploader.py` script uploads a file to an S3 bucket. This action triggers the Lambda function that watches for changes in data availability. The `subscriber.py` script polls the queue for any new messages. Upon receiving a data availability message, the data referenced in the message is downloaded.
