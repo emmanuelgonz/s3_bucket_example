@@ -8,6 +8,50 @@ This repository contains three examples:
 
 * [Publish & Subscribe](#publish--subscribe): Application performs an action that triggers AWS resources to send a notification message. This notification message triggers another application subscribing to that queue.
 
+> NOTE: Before running the above examples, make sure to follow the [AWS CLI Install & Setup](#aws-cli-install--setup) instructions.
+
+## AWS CLI Install & Setup
+
+The boto3 Python library requires that AWS CLI be installed and configured. Below are steps to do so.
+
+### Installing AWS CLI
+
+Installation instructions are provided below for Linux and Windows.
+
+> NOTE: Further documentation on AWS CLI installation is provided [here](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html).
+
+#### Linux
+
+```bash
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+sudo ./aws/install
+```
+
+#### Windows
+
+1. Download and run the AWS CLI MSI installer:
+
+    ```powershell
+    msiexec.exe /i https://awscli.amazonaws.com/AWSCLIV2.msi
+    ```
+
+1. Confirm the installation: 
+
+    ```powershell
+    aws --version
+    ```
+
+### Configuring AWS CLI
+
+To configure the AWS CLI, run: 
+
+```bash
+aws configure
+```
+
+Make sure to enter the access key ID and secret access key. These can be obtained from the NOS-T operator.
+
 ## Basic
 
 The [basic](./basic/) directory includes two files: a Jupyter notebook [s3_example.ipynb](./basic/s3_example.ipynb) and a Python script [s3_example.py](./basic/s3_example.py). Both files contain identical code, providing users with the flexibility to choose their preferred execution method.
