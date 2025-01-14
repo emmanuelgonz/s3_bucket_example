@@ -103,7 +103,14 @@ def process_message(message):
     return message_body
 
 def poll_queue(credentials, sqs,s3):
-    
+    """
+    Poll an SQS queue for messages
+
+    Args:
+        credentials: AWS credentials
+        sqs: SQS client
+        s3: S3 client
+    """
     while True:
         response = sqs.receive_message(
             QueueUrl=credentials["sqs_url"]
@@ -198,13 +205,13 @@ def main():
 
     threading.Thread(target=poll_queue, args=(credentials, sqs,s3,), daemon=True).start()
 
-    while True:
-        # Get the current time
-        current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        print(f"Current Time: {current_time}")
+    # while True:
+    #     # Get the current time
+    #     current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    #     print(f"Current Time: {current_time}")
         
-        # Wait for 5 seconds
-        time.sleep(5)
+    #     # Wait for 5 seconds
+    #     time.sleep(5)
 
 if __name__ == '__main__':
     main()

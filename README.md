@@ -40,10 +40,6 @@ The [mfa_nonmfa](./mfa_nonmfa/) directory contains two Jupyer notebook examples,
 
 The NOS-T framework employs the Advanced Message Queuing Protocol (AMQP) through RabbitMQ. However, in some scenarios, different messaging protocols are necessary. For instance, when model output data needs to be ingested by SOS applications via resources other than RabbitMQ, changes in data availability within a Simple Storage Service (S3) bucket are detected by an AWS Lambda function. This Lambda function sends a Simple Notification Service (SNS) message to a Simple Queue Service (SQS) queue. SOS applications receive data availability messages by subscribing to the SQS queue (Figure 1).
 
-<!-- <img src="https://docs.google.com/drawings/d/e/2PACX-1vTmZIFYDTr8kw22hmZzo7mpdfYMv_oKMk9DdagOu0ESL11nvcv374iLfNZTaMVI7LT1iGR6EyGKiY7A/pub?w=1318&amp;h=764" alt="Publish/Subscribe Workflow Diagram involving AWS resources including S3, Lambda, SNS, and SQS.">
-
-<figcaption>Figure 1: Publish/Subscribe Workflow Diagram</figcaption> -->
-
 <p>
     <img src="https://docs.google.com/drawings/d/e/2PACX-1vTmZIFYDTr8kw22hmZzo7mpdfYMv_oKMk9DdagOu0ESL11nvcv374iLfNZTaMVI7LT1iGR6EyGKiY7A/pub?w=1318&amp;h=764" alt="Publish/Subscribe Workflow Diagram involving AWS resources including S3, Lambda, SNS, and SQS.">
     <em>Figure 1. Publish/Subscribe Workflow Diagram</em>
