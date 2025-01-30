@@ -52,6 +52,30 @@ aws configure
 
 Make sure to enter the access key ID and secret access key. These can be obtained from the NOS-T operator.
 
+## Python Package Install
+
+Python packages can be installed as follows depending on if using Conda or not:
+
+### Python
+
+```bash
+python3 -m pip install boto3 geopandas python-dotenv
+```
+
+### Conda
+
+If you prefer using Conda, you can run:
+
+```bash
+conda env create -f environment.yml
+```
+
+Then load the environment:
+
+```bash
+conda activate sos
+```
+
 ## Basic
 
 The [basic](./basic/) directory includes two files: a Jupyter notebook [s3_example.ipynb](./basic/s3_example.ipynb) and a Python script [s3_example.py](./basic/s3_example.py). Both files contain identical code, providing users with the flexibility to choose their preferred execution method.
