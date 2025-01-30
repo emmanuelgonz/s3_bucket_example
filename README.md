@@ -54,9 +54,9 @@ Make sure to enter the access key ID and secret access key. These can be obtaine
 
 ## Python Package Install
 
-Python packages can be installed as follows depending on if using Conda or not:
+Python packages can be installed as follows depending on if using pip or Conda:
 
-### Python
+### Pip
 
 ```bash
 python3 -m pip install boto3 geopandas python-dotenv
